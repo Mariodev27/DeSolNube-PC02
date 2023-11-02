@@ -3,10 +3,10 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const mongoose = require('mongoose');
 const keys = require('./config/keys');
 const express = require('express');
-const fetch = require('node-fetch'); // Añade esto
+const fetch = require('node-fetch');
 const session = require('express-session');
 
-require('./models/User'); // Mueve esto aquí
+require('./models/User'); 
 const User = mongoose.model('users');
 
 const app = express();
@@ -80,5 +80,3 @@ app.listen(port, () => {
 mongoose.connect('mongodb+srv://mario:123@cluster0.doiljmt.mongodb.net/?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('MongoDB Connected...'))
     .catch(err => console.log(err));
-
-// El resto de tu código...
