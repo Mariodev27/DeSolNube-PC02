@@ -29,6 +29,12 @@ app.get('/users', async (req, res) => {
         res.send(users);
 });
 
+app.delete('/api/users/:id', async (req, res) => {
+    const result = await User.findByIdAndDelete(req.params.id);
+    if (!result) return res.status(404).send('User not found');
+    res.json({ message: 'User deleted successfully' });
+});
+
 fetch('http://localhost:5000/users')
         .then(response => response.json())
         .then(data => console.log(data))

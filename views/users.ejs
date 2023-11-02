@@ -2,12 +2,30 @@
 <html>
 <head>
     <title>Users</title>
+    <script>
+        function deleteUser(id) {
+            fetch('/api/users/' + id, {
+                method: 'DELETE'
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message === 'User deleted successfully') {
+                    // Recargar la página para reflejar la eliminación del usuario
+                    location.reload();
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
 </head>
 <body>
     <h1>Users</h1>
     <ul>
         <% users.forEach(user => { %>
-            <li><%= user.name %></li>
+            <li>
+                <%= user.name %> 
+                <button onclick="deleteUser('<%= user._id %>')">Delete</button>
+            </li>
         <% }) %>
     </ul>
 </body>
